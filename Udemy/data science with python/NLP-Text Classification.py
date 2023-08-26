@@ -9,18 +9,15 @@ from nltk.corpus import movie_reviews
 documents = []
 
 for category in movie_reviews.categories():
-    for fileid in movie_reviews.fileids(category):
-        documents.append((list(movie_reviews.words(fileid)), category))
-
+    documents.extend(
+        (list(movie_reviews.words(fileid)), category)
+        for fileid in movie_reviews.fileids(category)
+    )
 # Shuffle the documents
 random.shuffle(documents)
 print(documents[0])
 
-# Normalize the dataset
-all_words = []
-for w in movie_reviews.words():
-    all_words.append(w.lower())
-
+all_words = [w.lower() for w in movie_reviews.words()]
 # NLTK frequency distribution
 all_words = nltk.FreqDist(all_words)
 print(all_words.most_common(15))
@@ -33,10 +30,7 @@ word_featuers = list(all_words.keys())[:3000]
 
 def find_featuers(document):
     words = set(document)
-    featuers = {}
-    for w in word_featuers:
-        featuers[w] = (w in words)
-    return featuers
+    return {w: (w in words) for w in word_featuers}
 
 print((find_featuers(movie_reviews.words('pos/cv000_29590.txt'))))
 

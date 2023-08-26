@@ -5,16 +5,16 @@ import numpy as np
 ar=np.arange(5,20)
 ar
 ar[4]
-ar[0:5]
+ar[:5]
 ar[4:]
 ar[:6]
 
-ar[0:4]=100
+ar[:4] = 100
 ar
 ar=np.arange(5,20)
 ar
 
-slice_ar=ar[0:5]
+slice_ar = ar[:5]
 slice_ar
 slice_ar[:]=99
 slice_ar

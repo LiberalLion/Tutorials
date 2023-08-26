@@ -17,11 +17,5 @@ print(stop_words)
 # Tokenize words
 word_tokenize = word_tokenize(dataset)
 
-# Remove Stop Words from dataset
-filtered_sentences = []
-
-for w in word_tokenize:
-    if w not in stop_words:
-        filtered_sentences.append(w)
-
+filtered_sentences = [w for w in word_tokenize if w not in stop_words]
 print(filtered_sentences)
